@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from '../contexts/authContext';
 import { Link } from "react-router-dom";
 
-const LoginPage = props => {
+const LoginPage = _props => {
     const context = useContext(AuthContext);
 
     const [userName, setUserName] = useState("");
