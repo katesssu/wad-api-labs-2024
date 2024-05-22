@@ -1,5 +1,3 @@
-This archive contains the code demonstrating a custom solution for protected routes and authentication in a React app. 
+# Assignment 2 - Web API.
 
-Run npm install followed by npm start. 
-
-NOTE: REQUIRES SOLUTION FOR LAST LAB RUNNING ON localhost:8080
+Name: Katie Sugrue
