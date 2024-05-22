@@ -1,29 +1,62 @@
 export const getMovies = async () => {
-    const response = await  fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=be66b7b48b74eeb7e9b82961148f44c7&language=en-US&include_adult=false&page=1`
-    )
-    return response.json()
-  };
+  try {
+    const response = await fetch('http://localhost:3000/api/movies', {
+      headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch movies:', error);
+    throw error; // Re-throw the error to be handled by the calling function
+  }
+};
 
   
 export const login = async (username, password) => {
-  const response = await fetch('http://localhost:8080/api/users', {
+  try {
+    const response = await fetch('http://localhost:3000/api/users', {
       headers: {
-          'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       },
-      method: 'post',
-      body: JSON.stringify({ username: username, password: password })
-  });
-  return response.json();
+      method: 'POST',
+      body: JSON.stringify({ username, password })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to login:', error);
+    throw error; // Re-throw the error to be handled by the calling function
+  }
 };
 
+
 export const signup = async (username, password) => {
-  const response = await fetch('http://localhost:8080/api/users?action=register', {
+  try {
+    const response = await fetch('http://localhost:3000/api/users?action=register', {
       headers: {
-          'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       },
-      method: 'post',
-      body: JSON.stringify({ username: username, password: password })
-  });
-  return response.json();
+      method: 'POST',
+      body: JSON.stringify({ username, password })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to signup:', error);
+    throw error; // Re-throw the error to be handled by the calling function
+  }
 };

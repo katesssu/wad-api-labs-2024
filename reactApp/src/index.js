@@ -11,12 +11,13 @@ import SignUpPage from "./pages/signUpPage";
 import ProtectedRoutes from "./protectedRoutes";
 import Header from "./components/siteHeader";
 
+// Initialize QueryClient with default options
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 360000,
-      refetchInterval: 360000,
-      refetchOnWindowFocus: false
+      staleTime: 360000, // 6 minutes
+      refetchInterval: 360000, // 6 minutes
+      refetchOnWindowFocus: false, // Disable refetch on window focus
     },
   },
 });
@@ -41,7 +42,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<PublicPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={ <SignUpPage /> } />
+            <Route path="/signup" element={<SignUpPage />} />
             <Route element={<ProtectedRoutes />}>
               <Route path="/movies" element={<MoviesPage />} />
               <Route path="/profile" element={<ProfilePage />} />
@@ -54,5 +55,10 @@ const App = () => {
   );
 };
 
-const rootElement = createRoot( document.getElementById("root") )
-rootElement.render(<App />);
+// Ensure you get the correct root element
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  createRoot(rootElement).render(<App />);
+} else {
+  console.error("Failed to find the root element");
+}
